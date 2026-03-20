@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I'm Sorry My Love 💔</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  overflow:hidden;
+  color:white;
+  background:#000;
+}
+
+/* VIDEO BACKGROUND */
+video.bg{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.55);
+  z-index:-1;
+}
+
+/* PAGE */
+.page{
+  width:100%;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:20px;
+  right:20px;
+}
+nav button{
+  margin:5px;
+  padding:10px;
+  border:none;
+  border-radius:50%;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+}
+
+/* TEXT */
+h1,h2,p{
+  text-shadow:0 0 10px black;
+}
+
+/* TYPING */
+.typing{
+  border-right:2px solid white;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:20px;
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+}
+
+/* GALLERY */
+.gallery img{
+  width:180px;
+  margin:10px;
+  border-radius:15px;
+}
+
+/* LETTER */
+.letter{
+  display:none;
+  background:rgba(0,0,0,0.6);
+  padding:20px;
+  border-radius:15px;
+  margin-top:20px;
+}
+
+/* SECRET */
+.secret{
+  display:none;
+  margin-top:20px;
+}
+
+/* HEARTS */
+.heart{
+  position:fixed;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO -->
+<video class="bg" autoplay muted loop playsinline>
+  <source src="background.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="Until-I-Found-You.mp3">
+</audio>
+
+<!-- NAV -->
+<nav>
+  <button onclick="showPage(1)">1</button>
+  <button onclick="showPage(2)">2</button>
+  <button onclick="showPage(3)">3</button>
+  <button onclick="showPage(4)">4</button>
+</nav>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+  <h1>I'm So Sorry KoKo 🥺💔</h1>
+  <div class="typing" id="typing"></div>
+  <button class="btn" onclick="playMusic()">Play My Song For You 🎵</button>
+</div>
+
+<!-- PAGE 2 (FIXED ✅) -->
+<div class="page" id="page2" style="display:none;">
+  <h2>Our Memories 📸</h2>
+  <h2>We’ve been together for 160 days Acx 🫶🏻</h2>
+  <div class="gallery">
+    <img src="1.jpg">
+    <img src="2.jpg">
+    <img src="3.jpg">
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3" style="display:none;">
+  <h2>💞 A Letter From My Heart 💞</h2>
+  <button class="btn" onclick="showLetter()">Open My Heart</button>
+
+  <div class="letter" id="letter">
+    <p>
+      I’m truly sorry for hurting you… 💔<br><br>
+      You mean everything to me.<br><br>
+      I Love You so much KoKo 💞
+    </p>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4" style="display:none;">
+  <h2>🎁 One Last Thing...</h2>
+  <button class="btn" onclick="unlock()">Click to Unlock</button>
+
+  <div class="secret" id="secret">
+    I love you and I miss you so much koko 🙄💗
+    <br><br>
+    <br>Myr gye cx tl ar bwr 👀💋</br>
+    <video width="300" controls>
+      <source src="heehee.mp4">
+    </video>
+  </div>
+</div>
+
+<script>
+
+/* PAGE SWITCH */
+function showPage(num){
+  for(let i=1;i<=4;i++){
+    document.getElementById("page"+i).style.display="none";
+  }
+  document.getElementById("page"+num).style.display="flex";
+}
+
+/* MUSIC */
+function playMusic(){
+  document.getElementById("music").play();
+}
+
+/* TYPING */
+let text="I’m sorry for what I did. I never meant to hurt you… 💔 ";
+let i=0;
+function typing(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typing,50);
+  }
+}
+typing();
+
+/* HEARTS */
+function createHeart(){
+  let heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+}
+setInterval(createHeart,300);
+
+/* LETTER */
+function showLetter(){
+  document.getElementById("letter").style.display="block";
+}
+
+/* 🎁 SECRET (STOP MUSIC HERE) */
+function unlock(){
+  document.getElementById("secret").style.display="block";
+
+  let music = document.getElementById("music");
+  music.pause();        // ⛔ stop song
+  music.currentTime = 0; // 🔁 reset to start
+}
+
+</script>
+
+</body>
+</html>
